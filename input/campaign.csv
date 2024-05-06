@@ -1,0 +1,12 @@
+ID,Name,Budget,Type,AccountID
+1,Campaign 1,100000,Display,1
+2,Campaign 2,150000,Search,2
+3,Campaign 3,80000,Video,3
+4,Campaign 4,120000,Display,4
+5,Campaign 5,90000,Social,5
+6,Campaign 6,200000,PPC,1
+7,Campaign 7,300000,Display,2
+8,Campaign 8,50000,Email,3
+9,Campaign 9,180000,Social,4
+10,Campaign 10,70000,SEO,5
+11,ABC,ABC,Social,1

@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "name": "Advertising Campaign A",
+    "budget": 1000.0,
+    "type": "Display",
+    "status": "Active",
+    "click": 500,
+    "view": 10000,
+    "campaignId": 1
+  },
+  {
+    "id": 2,
+    "name": "Marketing Campaign B",
+    "budget": 2000.0,
+    "type": "Social",
+    "status": "Inactive",
+    "click": 300,
+    "view": 8000,
+    "campaignId": 1
+  },
+  {
+    "id": 3,
+    "name": "Email Campaign C",
+    "budget": 1500.0,
+    "type": "Email",
+    "status": "Active",
+    "click": 700,
+    "view": 12000,
+    "campaignId": 2
+  },
+  {
+    "id": 4,
+    "name": "SEO Campaign D",
+    "budget": 1800.0,
+    "type": "SEO",
+    "status": "Active",
+    "click": 600,
+    "view": 9500,
+    "campaignId": 2
+  },
+  {
+    "id": 5,
+    "name": "PPC Campaign E",
+    "budget": 2500.0,
+    "type": "PPC",
+    "status": "Inactive",
+    "click": 400,
+    "view": 7500,
+    "campaignId": 3
+  },
+  {
+    "id": 6,
+    "name": "Content Campaign F",
+    "budget": 2200.0,
+    "type": "Content",
+    "status": "Active",
+    "click": 550,
+    "view": 10500,
+    "campaignId": 4
+  },
+  {
+    "id": 7,
+    "name": "Social Media Campaign G",
+    "budget": 1900.0,
+    "type": "Social Media",
+    "status": "Inactive",
+    "click": 350,
+    "view": 8200,
+    "campaignId": 5
+  },
+  {
+    "id": 8,
+    "name": "Display Campaign H",
+    "budget": 2800.0,
+    "type": "Display",
+    "status": "Active",
+    "click": 450,
+    "view": 8500,
+    "campaignId": 6
+  },
+  {
+    "id": 9,
+    "name": "Email Campaign I",
+    "budget": 1700.0,
+    "type": "Email",
+    "status": "Inactive",
+    "click": 650,
+    "view": 9000,
+    "campaignId": 7
+  },
+  {
+    "id": 10,
+    "name": "SEO Campaign J",
+    "budget": 3000.0,
+    "type": "SEO",
+    "status": "Active",
+    "click": 700,
+    "view": 11000,
+    "campaignId": 8
+  },
+  {
+    "id": 11,
+    "name": "PPC Campaign K",
+    "budget": 2300.0,
+    "type": "PPC",
+    "status": "Inactive",
+    "click": 500,
+    "view": 8200,
+    "campaignId": 9
+  },
+  {
+    "id": 12,
+    "name": "Social Campaign L",
+    "budget": 2100.0,
+    "type": "Social",
+    "status": "Active",
+    "click": 400,
+    "view": 7500,
+    "campaignId": 10
+  },
+  {
+    "id": 13,
+    "name": "Social Campaign M",
+    "budget": 3000.0,
+    "type": "Social",
+    "status": "Active",
+    "click": 500,
+    "view": 8200,
+    "campaignId": 11
+  },
+  {
+    "id": 14,
+    "name": "SEO Campaign N",
+    "budget": 2000.0,
+    "type": "SEO",
+    "status": "Inactive",
+    "click": 600,
+    "view": 9500,
+    "campaignId": 12
+  },
+  {
+    "id": 15,
+    "name": "Email Campaign O",
+    "budget": 2500.0,
+    "type": "Email",
+    "status": "Active",
+    "click": 700,
+    "view": 12000,
+    "campaignId": 13
+  },
+  {
+    "id": 16,
+    "name": "Display Campaign P",
+    "budget": 1800.0,
+    "type": "Display",
+    "status": "Inactive",
+    "click": 550,
+    "view": 10500,
+    "campaignId": 14
+  },
+  {
+    "id": 17,
+    "name": "PPC Campaign Q",
+    "budget": 1900.0,
+    "type": "PPC",
+    "status": "Active",
+    "click": 350,
+    "view": 8200,
+    "campaignId": 15
+  },
+  {
+    "id": 18,
+    "name": "Social Media Campaign R",
+    "budget": 2800.0,
+    "type": "Social Media",
+    "status": "Active",
+    "click": 450,
+    "view": 8500,
+    "campaignId": 16
+  },
+  {
+    "id": 19,
+    "name": "Content Campaign S",
+    "budget": 1700.0,
+    "type": "Content",
+    "status": "Inactive",
+    "click": 650,
+    "view": 9000,
+    "campaignId": 17
+  },
+  {
+    "id": 20,
+    "name": "Advertising Campaign T",
+    "budget": 3000.0,
+    "type": "Display",
+    "status": "Active",
+    "click": 700,
+    "view": 11000,
+    "campaignId": 18
+  }
+]

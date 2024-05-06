@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "name": "Campaign 1",
+    "budget": 100000,
+    "type": "Display",
+    "accountId": 1
+  },
+  {
+    "id": 2,
+    "name": "Campaign 2",
+    "budget": 150000,
+    "type": "Search",
+    "accountId": 2
+  },
+  {
+    "id": 3,
+    "name": "Campaign 3",
+    "budget": 80000,
+    "type": "Video",
+    "accountId": 3
+  },
+  {
+    "id": 4,
+    "name": "Campaign 4",
+    "budget": 120000,
+    "type": "Display",
+    "accountId": 4
+  },
+  {
+    "id": 5,
+    "name": "Campaign 5",
+    "budget": 90000,
+    "type": "Social",
+    "accountId": 5
+  },
+  {
+    "id": 6,
+    "name": "Campaign 6",
+    "budget": 200000,
+    "type": "PPC",
+    "accountId": 1
+  },
+  {
+    "id": 7,
+    "name": "Campaign 7",
+    "budget": 300000,
+    "type": "Display",
+    "accountId": 2
+  },
+  {
+    "id": 8,
+    "name": "Campaign 8",
+    "budget": 50000,
+    "type": "Email",
+    "accountId": 3
+  },
+  {
+    "id": 9,
+    "name": "Campaign 9",
+    "budget": 180000,
+    "type": "Social",
+    "accountId": 4
+  },
+  {
+    "id": 10,
+    "name": "Campaign 10",
+    "budget": 70000,
+    "type": "SEO",
+    "accountId": 5
+  },
+  {
+    "id": 11,
+    "name": "Campaign 11",
+    "budget": 150000,
+    "type": "Search",
+    "accountId": 1
+  },
+  {
+    "id": 12,
+    "name": "Campaign 12",
+    "budget": 120000,
+    "type": "Display",
+    "accountId": 2
+  },
+  {
+    "id": 13,
+    "name": "Campaign 13",
+    "budget": 80000,
+    "type": "Video",
+    "accountId": 3
+  },
+  {
+    "id": 14,
+    "name": "Campaign 14",
+    "budget": 300000,
+    "type": "Display",
+    "accountId": 4
+  },
+  {
+    "id": 15,
+    "name": "Campaign 15",
+    "budget": 70000,
+    "type": "SEO",
+    "accountId": 5
+  },
+  {
+    "id": 16,
+    "name": "Campaign 16",
+    "budget": 200000,
+    "type": "PPC",
+    "accountId": 1
+  },
+  {
+    "id": 17,
+    "name": "Campaign 17",
+    "budget": 50000,
+    "type": "Email",
+    "accountId": 2
+  },
+  {
+    "id": 18,
+    "name": "Campaign 18",
+    "budget": 180000,
+    "type": "Social",
+    "accountId": 3
+  },
+  {
+    "id": 19,
+    "name": "Campaign 19",
+    "budget": 90000,
+    "type": "Social",
+    "accountId": 4
+  },
+  {
+    "id": 20,
+    "name": "Campaign 20",
+    "budget": 100000,
+    "type": "Display",
+    "accountId": 5
+  }
+]

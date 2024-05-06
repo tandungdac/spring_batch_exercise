@@ -1,0 +1,14 @@
+Id,Name,Budget,Type,Status,Click,View,CampaignId
+1,Advertising Campaign A,1000.0,Display,Active,500,10000,1
+2,Marketing Campaign B,2000.0,Social,Inactive,300,8000,1
+3,Email Campaign C,1500.0,Email,Active,700,12000,2
+4,SEO Campaign D,1800.0,SEO,Active,600,9500,2
+5,PPC Campaign E,2500.0,PPC,Inactive,400,7500,3
+6,Content Campaign F,2200.0,Content,Active,550,10500,4
+7,Social Media Campaign G,1900.0,Social Media,Inactive,350,8200,5
+8,Display Campaign H,2800.0,Display,Active,450,8500,6
+9,Email Campaign I,1700.0,Email,Inactive,650,9000,7
+10,SEO Campaign J,3000.0,SEO,Active,700,11000,8
+11,PPC Campaign K,2300.0,PPC,Inactive,500,8200,9
+12,Social Campaign L,2100.0,Social,Active,400,7500,10
+13,Social Campaign L,social,Social,Active,400,7500,10
