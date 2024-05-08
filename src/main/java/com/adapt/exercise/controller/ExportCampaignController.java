@@ -10,6 +10,7 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +28,16 @@ public class ExportCampaignController {
     @Qualifier("exportCampaignJob")
     private Job exportCampaignJob;
 
+    @Value("${campaign.file.output}")
+    String campaignFileOutput;
+
     @GetMapping("/runJob")
     public ResponseEntity<BatchJobResponse> runJob() {
         BatchJobResponse response = new BatchJobResponse();
         try {
             JobParameters jobParameters = new JobParametersBuilder()
                     .addLong("time", System.currentTimeMillis())
+                    .addString("campaignFileOutput", campaignFileOutput)
                     .toJobParameters();
             JobExecution jobExecution = jobLauncher.run(exportCampaignJob, jobParameters);
             response.setJobName(jobExecution.getJobInstance().getJobName());

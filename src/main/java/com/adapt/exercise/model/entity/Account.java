@@ -24,13 +24,14 @@ public class Account {
     @NotBlank(message = "Name is not empty")
     private String name;
 
+    @Column(name = "is_expired")
     private Boolean isExpired;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private Set<Campaign> campaigns;
 
     @NotNull
-    @Column(columnDefinition = "boolean default true")
+    @Column(columnDefinition = "boolean default true", name = "is_valid")
     private Boolean isValid;
 
     @Override

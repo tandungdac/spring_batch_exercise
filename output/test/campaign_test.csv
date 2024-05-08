@@ -1,0 +1,11 @@
+Id,Name,Budget,Type,Total Ad Group Budget,Total Ad Group Click,Total Ad Group View
+1,Campaign 1,100000.0,Display,3000.0,800,18000
+2,Campaign 2,150000.0,Search,3300.0,1300,21500
+3,Campaign 3,80000.0,Video,2500.0,400,7500
+4,Campaign 4,120000.0,Display,2200.0,550,10500
+5,Campaign 5,120000.0,Social,1900.0,350,8200
+6,Campaign 6,120000.0,PPC,2800.0,450,8500
+7,Campaign 7,120000.0,Display,1700.0,650,9000
+8,Campaign 8,120000.0,Email,3000.0,700,11000
+9,Campaign 9,120000.0,Social,2300.0,500,8200
+10,Campaign 10,90000.0,SEO,2100.0,400,7500

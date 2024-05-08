@@ -1,7 +1,5 @@
 package com.adapt.exercise.model.entity;
 
-import com.adapt.exercise.model.entity.Account;
-import com.adapt.exercise.model.entity.AdGroup;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,7 +38,7 @@ public class Campaign {
     private Account account;
 
     @NotNull
-    @Column(columnDefinition = "boolean default false")
+    @Column(columnDefinition = "boolean default true", name = "is_valid")
     private Boolean isValid;
 
     @Override

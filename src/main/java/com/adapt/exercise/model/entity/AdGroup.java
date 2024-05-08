@@ -40,7 +40,7 @@ public class AdGroup {
     private Campaign campaign;
 
     @NotNull
-    @Column(columnDefinition = "boolean default false")
+    @Column(columnDefinition = "boolean default true", name = "is_valid")
     private Boolean isValid;
 
     @Override

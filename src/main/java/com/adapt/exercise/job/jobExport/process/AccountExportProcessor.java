@@ -25,7 +25,7 @@ public class AccountExportProcessor implements ItemProcessor<Account, AccountOut
         }
 
         accountExport.setBudget(budget);
-
+        log.info("Processing Account: {}", accountExport);
         return accountExport;
     }
 }

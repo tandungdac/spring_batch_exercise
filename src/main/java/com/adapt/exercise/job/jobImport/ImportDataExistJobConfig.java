@@ -1,12 +1,10 @@
 package com.adapt.exercise.job.jobImport;
 
-import com.adapt.exercise.job.jobBy.process.AdGroupProcessor;
 import com.adapt.exercise.job.jobBy.process.CampaignImportProcessor;
+import com.adapt.exercise.job.jobBy.validate.AdGroupValidator;
 import com.adapt.exercise.job.jobBy.validate.CampaignValidator;
 import com.adapt.exercise.model.dto.input.AdGroupInput;
 import com.adapt.exercise.model.dto.input.CampaignInput;
-import com.adapt.exercise.model.entity.AdGroup;
-import com.adapt.exercise.model.entity.Campaign;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,12 +49,6 @@ public class ImportDataExistJobConfig {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private ValidatingItemProcessor<CampaignInput> validatingCampaignProcessor;
-
-    @Autowired
-    private ValidatingItemProcessor<AdGroupInput> validatingAdGroupProcessor;
-
     @Bean
     public Job importDataExistJob() {
         return jobBuilderFactory
@@ -73,7 +65,7 @@ public class ImportDataExistJobConfig {
                 .get("importJsonCampaignStep")
                 .<CampaignInput, CampaignInput>chunk(10)
                 .reader(campaignInputJsonItemReader())
-                .processor(validatingCampaignProcessor)
+                .processor(validateCampaignProcessor())
                 .writer(campaignItemWriter())
                 .faultTolerant()
                 .skip(ConstraintViolationException.class)
@@ -87,7 +79,7 @@ public class ImportDataExistJobConfig {
                 .get("importJsonAdGroupStep")
                 .<AdGroupInput, AdGroupInput>chunk(10)
                 .reader(adGroupInputJsonItemReader())
-                .processor(validatingAdGroupProcessor)
+                .processor(validateAdGroupProcessor())
                 .writer(adGroupItemWriter())
                 .faultTolerant()
                 .skip(ConstraintViolationException.class)
@@ -120,6 +112,38 @@ public class ImportDataExistJobConfig {
                 .name("adGroupInputJsonItemReader")
                 .build();
     }
+
+    @Bean
+    public CampaignImportProcessor campaignProcessor() {
+        return new CampaignImportProcessor(validateCampaignProcessor());
+    }
+
+    @Bean
+    public ValidatingItemProcessor<CampaignInput> validateCampaignProcessor() {
+        ValidatingItemProcessor<CampaignInput> validatingItemProcessor = new ValidatingItemProcessor<>();
+        validatingItemProcessor.setValidator(campaignImportValidator());
+        validatingItemProcessor.setFilter(true);
+        return validatingItemProcessor;
+    }
+
+    @Bean
+    public CampaignValidator campaignImportValidator() {
+        return new CampaignValidator();
+    }
+
+    @Bean
+    public ValidatingItemProcessor<AdGroupInput> validateAdGroupProcessor() {
+        ValidatingItemProcessor<AdGroupInput> validatingItemProcessor = new ValidatingItemProcessor<>();
+        validatingItemProcessor.setValidator(adGroupImportValidator());
+        validatingItemProcessor.setFilter(true);
+        return validatingItemProcessor;
+    }
+
+    @Bean
+    public AdGroupValidator adGroupImportValidator() {
+        return new AdGroupValidator();
+    }
+
 
     @Bean
     public ItemWriter<CampaignInput> campaignItemWriter() {

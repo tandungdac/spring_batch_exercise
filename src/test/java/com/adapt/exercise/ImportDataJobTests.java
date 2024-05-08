@@ -3,6 +3,7 @@ package com.adapt.exercise;
 import com.adapt.exercise.job.jobBy.ImportDataJobConfig;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.JobExecution;
@@ -12,32 +13,43 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 
+import javax.sql.DataSource;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 @SpringBatchTest
 @EnableAutoConfiguration
-@ConfigurationProperties(value = "application.properties")
-@ContextConfiguration(classes = {AnnotationConfigContextLoader.class, ImportDataJobConfig.class})
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ContextConfiguration(classes = {ImportDataJobConfig.class, TestDatabaseConfig.class})
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+        DirtiesContextTestExecutionListener.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
-        scripts = {"classpath:schema.sql", "classpath:/org/springframework/batch/core/schema-mysql.sql"})
+        scripts = {"classpath:/org/springframework/batch/core/schema-h2.sql"})
 @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
-        scripts = "classpath:/org/springframework/batch/core/schema-drop-mysql.sql")
+        scripts = "classpath:/org/springframework/batch/core/schema-drop-h2.sql")
 public class ImportDataJobTests {
     public static final Logger log = LoggerFactory.getLogger(ImportDataJobTests.class);
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
 
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @Test
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public void testImportDataJob() throws Exception {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
@@ -47,5 +59,17 @@ public class ImportDataJobTests {
                 .toJobParameters();
         JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
         Assert.assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
+
+        int accountsCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM accounts WHERE is_valid = true", Integer.class);
+        int expectedAccountsCount = 3;
+        Assert.assertEquals(expectedAccountsCount, accountsCount);
+
+        int campaignsCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM campaigns WHERE is_valid = true", Integer.class);
+        int expectedCampaignsCount = 5;
+        Assert.assertEquals(expectedCampaignsCount, campaignsCount);
+
+        int adGroupsCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM ad_groups WHERE is_valid = true", Integer.class);
+        int expectedAdGroupsCount = 5;
+        Assert.assertEquals(expectedAdGroupsCount, adGroupsCount);
     }
 }

@@ -1,5 +1,8 @@
 package com.adapt.exercise.job.jobBy;
 
+import com.adapt.exercise.job.jobBy.process.AccountProcessor;
+import com.adapt.exercise.job.jobBy.process.AdGroupProcessor;
+import com.adapt.exercise.job.jobBy.process.CampaignImportProcessor;
 import com.adapt.exercise.job.jobBy.validate.AccountValidator;
 import com.adapt.exercise.job.jobBy.validate.AdGroupValidator;
 import com.adapt.exercise.job.jobBy.validate.CampaignValidator;
@@ -8,9 +11,6 @@ import com.adapt.exercise.model.dto.input.CampaignInput;
 import com.adapt.exercise.model.entity.Account;
 import com.adapt.exercise.model.entity.AdGroup;
 import com.adapt.exercise.model.entity.Campaign;
-import com.adapt.exercise.job.jobBy.process.AccountProcessor;
-import com.adapt.exercise.job.jobBy.process.AdGroupProcessor;
-import com.adapt.exercise.job.jobBy.process.CampaignImportProcessor;
 import com.adapt.exercise.repository.IAccountRepository;
 import com.adapt.exercise.repository.IAdGroupRepository;
 import com.adapt.exercise.repository.ICampaignRepository;
@@ -34,7 +34,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.PathResource;
 
-import javax.sql.DataSource;
 import javax.validation.ConstraintViolationException;
 import java.io.File;
 import java.util.ArrayList;
@@ -43,9 +42,6 @@ import java.util.List;
 @Configuration
 @EnableBatchProcessing
 public class ImportDataJobConfig {
-    @Autowired
-    public DataSource dataSource;
-
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
 

@@ -9,6 +9,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
@@ -27,8 +28,6 @@ import java.util.HashMap;
 @Configuration
 @EnableBatchProcessing
 public class ExportCampaignJobConfig {
-    @Value("${campaign.file.output}")
-    String campaignFileOutput;
 
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
@@ -40,22 +39,26 @@ public class ExportCampaignJobConfig {
     private ICampaignRepository campaignRepository;
 
     @Bean
-    public Job exportCampaignJob() {
+    public Job exportCampaignJob(
+            Step exportCampaignStep
+    ) {
         return jobBuilderFactory
                 .get("exportCampaignJob")
                 .incrementer(new RunIdIncrementer())
-                .start(exportCampaignStep())
+                .start(exportCampaignStep)
                 .build();
     }
 
     @Bean
-    public Step exportCampaignStep() {
+    public Step exportCampaignStep(
+            FlatFileItemWriter<CampaignOutput> campaignFlatFileItemWriter
+    ) {
         return stepBuilderFactory
                 .get("exportCampaignStep")
                 .<Campaign, CampaignOutput>chunk(10)
                 .reader(campaignRepositoryItemReader())
                 .processor(campaignExportProcessor())
-                .writer(campaignFlatFileItemWriter())
+                .writer(campaignFlatFileItemWriter)
                 .build();
     }
 
@@ -78,10 +81,13 @@ public class ExportCampaignJobConfig {
     }
 
     @Bean
-    public FlatFileItemWriter<CampaignOutput> campaignFlatFileItemWriter() {
+    @StepScope
+    public FlatFileItemWriter<CampaignOutput> campaignFlatFileItemWriter(
+            @Value("#{jobParameters['campaignFileOutput']}") String output
+    ) {
         return new FlatFileItemWriterBuilder<CampaignOutput>()
                 .name("campaignFlatFileItemWriter")
-                .resource(new FileSystemResource(campaignFileOutput))
+                .resource(new FileSystemResource(output))
                 .delimited()
                 .names("Id", "Name", "Budget", "Type", "AdGroupBudget", "AdGroupClick", "AdGroupView")
                 .headerCallback(headerCampaignWriter())
