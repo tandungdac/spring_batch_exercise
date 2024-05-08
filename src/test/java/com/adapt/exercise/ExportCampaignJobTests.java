@@ -15,9 +15,7 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.jdbc.Sql;
@@ -37,13 +35,11 @@ import java.util.stream.Stream;
 import static org.hamcrest.Matchers.contains;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 @SpringBatchTest
 @EnableAutoConfiguration
 @ContextConfiguration(classes = {ExportCampaignJobConfig.class, TestDatabaseConfig.class})
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
         scripts = {"classpath:/org/springframework/batch/core/schema-h2.sql"})
 @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,

@@ -2,6 +2,8 @@ package com.adapt.exercise;
 
 import com.adapt.exercise.job.jobBy.ImportDataJobConfig;
 import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -13,9 +15,7 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.jdbc.Sql;
@@ -27,13 +27,11 @@ import javax.sql.DataSource;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 @SpringBatchTest
 @EnableAutoConfiguration
 @ContextConfiguration(classes = {ImportDataJobConfig.class, TestDatabaseConfig.class})
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
         scripts = {"classpath:/org/springframework/batch/core/schema-h2.sql"})
 @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD,
@@ -48,6 +46,27 @@ public class ImportDataJobTests {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        log.info("Setup Job");
+        jdbcTemplate.update("DELETE FROM ad_groups");
+        jdbcTemplate.update("DELETE FROM campaigns");
+        jdbcTemplate.update("DELETE FROM import_ad_groups");
+        jdbcTemplate.update("DELETE FROM import_campaigns");
+        jdbcTemplate.update("DELETE FROM accounts");
+    }
+
+    @AfterEach
+    public void tearDown() {
+        log.info("Tear down");
+        jdbcTemplate.update("DELETE FROM ad_groups");
+        jdbcTemplate.update("DELETE FROM campaigns");
+        jdbcTemplate.update("DELETE FROM import_ad_groups");
+        jdbcTemplate.update("DELETE FROM import_campaigns");
+        jdbcTemplate.update("DELETE FROM accounts");
+    }
 
     @Test
     public void testImportDataJob() throws Exception {
